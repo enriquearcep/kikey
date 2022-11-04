@@ -4,22 +4,44 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kikey"
+        xmlns:vm="clr-namespace:Kikey.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="80" Width="300">
+        Title="Kikey"
+        Height="120"
+        Width="500"
+        ResizeMode="NoResize"
+        >
 
+    <Window.Resources>
+        
+        <vm:PasswordsViewModel
+            x:Key="PasswordsVM"
+            />
+        
+    </Window.Resources>
+    
     <StackPanel
+        DataContext="{StaticResource PasswordsVM}"
         VerticalAlignment="Center"
         >
 
         <ComboBox
+            DisplayMemberPath="ShowText"
             Height="25"
-            Margin="15"
+            IsEditable="True"
+            IsReadOnly="True"
+            ItemsSource="{Binding Passwords}"
+            Margin="15, 15, 15, 0"
+            SelectedValue="{Binding SelectedPassword}"
             VerticalAlignment="Center"
-            >
+            Text="Selecciona una contraseña y se copiará en el portapapeles"
+            />
 
-
-
-        </ComboBox>
+        <Label
+            Foreground="Gray"
+            Content="{Binding TitleText}"
+            HorizontalAlignment="Center"
+            />
 
     </StackPanel>
     
