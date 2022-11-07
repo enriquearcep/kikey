@@ -1,8 +1,11 @@
 ﻿using Kikey.Helpers;
 using Kikey.Models;
+using Kikey.Views;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Kikey.ViewModels
 {
@@ -40,32 +43,48 @@ namespace Kikey.ViewModels
                     _selectedPassword = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedPassword)));
                     Clipboard.SetText(value.PasswordHash);
-                    TitleText = $"Copiado en portapapeles [{SelectedPassword.PasswordHash}]";
-                }
-            }
-        }
-
-        private string _titleText;
-
-        public string TitleText
-        {
-            get => _titleText;
-            set
-            {
-                if (_titleText != value)
-                {
-                    _titleText = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TitleText)));
                 }
             }
         }
         #endregion
 
+        #region Commands
+        public ICommand ToNewPasswordCommand => new CommandHelper(ToNewPassword);
+        #endregion
+
+        public static PasswordsViewModel _instance;
+
+        public static PasswordsViewModel GetInstance()
+        {
+            if(_instance is null)
+            {
+                return new PasswordsViewModel();
+            }
+
+            return _instance;
+        }
+
         #region Constructors
         public PasswordsViewModel()
         {
             Passwords = FileHelper.GetPasswords();
-        } 
+
+            _instance = this;
+        }
+        #endregion
+
+        #region Methods
+        private void ToNewPassword()
+        {
+            var newPassword = new NewPasswordView();
+
+            newPassword.Show();
+        }
+
+        public void Reload()
+        {
+            Passwords = FileHelper.GetPasswords();
+        }
         #endregion
     }
 }

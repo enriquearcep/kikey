@@ -8,8 +8,9 @@
         mc:Ignorable="d"
         Title="Kikey"
         Height="120"
-        Width="500"
+        Width="850"
         ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         >
 
     <Window.Resources>
@@ -25,23 +26,89 @@
         VerticalAlignment="Center"
         >
 
-        <ComboBox
-            DisplayMemberPath="ShowText"
-            Height="25"
-            IsEditable="True"
-            IsReadOnly="True"
-            ItemsSource="{Binding Passwords}"
-            Margin="15, 15, 15, 0"
-            SelectedValue="{Binding SelectedPassword}"
-            VerticalAlignment="Center"
-            Text="Selecciona una contraseña y se copiará en el portapapeles"
-            />
+        <Grid
+            Margin="15, 15, 15, 15"
+            >
 
-        <Label
-            Foreground="Gray"
-            Content="{Binding TitleText}"
-            HorizontalAlignment="Center"
-            />
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition
+                    Width="0.9*"
+                    />
+
+                <ColumnDefinition
+                    Width="0.1*"
+                    />
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+
+                <RowDefinition
+                    Height="Auto"
+                    />
+
+            </Grid.RowDefinitions>
+
+            <ComboBox
+                DisplayMemberPath="ShowText"
+                Grid.Column="0"
+                Height="25"
+                IsEditable="True"
+                IsReadOnly="True"
+                ItemsSource="{Binding Passwords}"
+                SelectedValue="{Binding SelectedPassword}"
+                Text="Selecciona una contraseña y se copiará en el portapapeles"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                />
+
+            <StackPanel
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal"
+                >
+
+                <Button
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Command="{Binding ToNewPasswordCommand}"
+                    Cursor="Hand"
+                    Height="25"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    >
+
+                    <Image
+                        Height="25"
+                        Source="Resources/Images/add.png"
+                        VerticalAlignment="Center"
+                        Width="25"
+                        />
+
+                </Button>
+
+                <Button
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    Height="25"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    >
+
+                    <Image
+                        Height="25"
+                        Source="Resources/Images/settings.png"
+                        VerticalAlignment="Center"
+                        Width="25"
+                        />
+
+                </Button>
+
+            </StackPanel>
+
+        </Grid>
 
     </StackPanel>
     

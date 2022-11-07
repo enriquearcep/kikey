@@ -11,8 +11,6 @@ namespace Kikey
             InitializeComponent();
 
             Init();
-
-            // AddPassword();
         }
 
         private void Init()
@@ -22,6 +20,8 @@ namespace Kikey
 
         private void AddPassword()
         {
+            
+
             FileHelper.SavePassword(new Models.Password()
             {
                 Title = "San Pedro Garza García",
