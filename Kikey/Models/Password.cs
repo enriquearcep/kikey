@@ -24,7 +24,7 @@ namespace Kikey.Models
         public string PasswordHash { get; set; }
 
         [JsonIgnore]
-        public string ShowText => $"[{Type}] [{Title}] [{Server}] [{User}]";
+        public string ShowText => $"[{Type}] [{Title}] [{SubTitle}] [{Server}] [{User}]";
         public byte[] Hash => SecurityHelper.GetHash($"{Type}{Title}{SubTitle}{Server}{User}{PasswordHash}");
     }
 }
